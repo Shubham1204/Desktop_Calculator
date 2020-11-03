@@ -1,4 +1,4 @@
-﻿namespace CalculatorApp
+﻿namespace Calculator
 {
     partial class Calculator
     {

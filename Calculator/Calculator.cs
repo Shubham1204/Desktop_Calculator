@@ -8,10 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CalculatorApp
+namespace Calculator
 {
     public partial class Calculator : Form
     {
+
+
+        bool cleartext = false;
+        bool isText = false;
+        bool clearerror = false;
+      
         MenuStrip menuStrip1 = new MenuStrip();
         ToolStripMenuItem fileToolStripMenuItem = new ToolStripMenuItem();
         ToolStripMenuItem standardToolStripMenuItem = new ToolStripMenuItem();
@@ -27,7 +33,7 @@ namespace CalculatorApp
         Button mPlusBtn = new Button();
         Button mMinusBtn = new Button();
         Button escapeBtn = new Button();
-        Button AcBtn = new Button();
+        Button CeBtn = new Button();
         Button cBtn = new Button();
         Button rootBtn = new Button();
         Button oneBtn = new Button();
@@ -51,11 +57,12 @@ namespace CalculatorApp
         Button minusBtn = new Button();
         Button oneDivXBtn = new Button();
         Label label1 = new Label();
+        Label label2 = new Label();
+
 
         public Calculator()
         {
             InitializeComponent();
-
             // menuStrip1
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -198,14 +205,14 @@ namespace CalculatorApp
             this.escapeBtn.UseVisualStyleBackColor = true;
 
 
-            // ACBtn
-            this.AcBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AcBtn.Location = new System.Drawing.Point(83, 173);
-            this.AcBtn.Name = "AcBtn";
-            this.AcBtn.Size = new System.Drawing.Size(65, 50);
-            this.AcBtn.TabIndex = 2;
-            this.AcBtn.Text = "AC";
-            this.AcBtn.UseVisualStyleBackColor = true;
+            // CeBtn
+            this.CeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CeBtn.Location = new System.Drawing.Point(83, 173);
+            this.CeBtn.Name = "CeBtn";
+            this.CeBtn.Size = new System.Drawing.Size(65, 50);
+            this.CeBtn.TabIndex = 2;
+            this.CeBtn.Text = "CE";
+            this.CeBtn.UseVisualStyleBackColor = true;
 
 
             // cBtn
@@ -236,7 +243,6 @@ namespace CalculatorApp
             this.rootBtn.Text = "√";
             this.rootBtn.UseVisualStyleBackColor = true;
 
-
             // oneBtn
             this.oneBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.oneBtn.Location = new System.Drawing.Point(12, 229);
@@ -245,6 +251,7 @@ namespace CalculatorApp
             this.oneBtn.TabIndex = 2;
             this.oneBtn.Text = "1";
             this.oneBtn.UseVisualStyleBackColor = true;
+            this.oneBtn.Click += new System.EventHandler(this.numberBtnClick);
 
 
             // twoBtn
@@ -255,6 +262,7 @@ namespace CalculatorApp
             this.twoBtn.TabIndex = 2;
             this.twoBtn.Text = "2";
             this.twoBtn.UseVisualStyleBackColor = true;
+            this.twoBtn.Click += new System.EventHandler(this.numberBtnClick);
 
 
             // threeBtn
@@ -265,6 +273,7 @@ namespace CalculatorApp
             this.threeBtn.TabIndex = 2;
             this.threeBtn.Text = "3";
             this.threeBtn.UseVisualStyleBackColor = true;
+            this.threeBtn.Click += new System.EventHandler(this.numberBtnClick);
 
 
             // divBtn
@@ -276,7 +285,6 @@ namespace CalculatorApp
             this.divBtn.Text = "/";
             this.divBtn.UseVisualStyleBackColor = true;
 
-
             // modBtn
             this.modBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.modBtn.Location = new System.Drawing.Point(296, 229);
@@ -286,7 +294,6 @@ namespace CalculatorApp
             this.modBtn.Text = "%";
             this.modBtn.UseVisualStyleBackColor = true;
 
-
             // fourBtn
             this.fourBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fourBtn.Location = new System.Drawing.Point(12, 285);
@@ -295,6 +302,7 @@ namespace CalculatorApp
             this.fourBtn.TabIndex = 2;
             this.fourBtn.Text = "4";
             this.fourBtn.UseVisualStyleBackColor = true;
+            this.fourBtn.Click += new System.EventHandler(this.numberBtnClick);
 
 
             // fiveBtn
@@ -305,7 +313,7 @@ namespace CalculatorApp
             this.fiveBtn.TabIndex = 2;
             this.fiveBtn.Text = "5";
             this.fiveBtn.UseVisualStyleBackColor = true;
-
+            this.fiveBtn.Click += new System.EventHandler(this.numberBtnClick);
 
             // sixBtn
             this.sixBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -315,7 +323,7 @@ namespace CalculatorApp
             this.sixBtn.TabIndex = 2;
             this.sixBtn.Text = "6";
             this.sixBtn.UseVisualStyleBackColor = true;
-
+            this.sixBtn.Click += new System.EventHandler(this.numberBtnClick);
 
             // mulBtn
             this.mulBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -335,7 +343,6 @@ namespace CalculatorApp
             this.oneDivXBtn.Text = "1/x";
             this.oneDivXBtn.UseVisualStyleBackColor = true;
 
-
             // sevenBtn
             this.sevenBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sevenBtn.Location = new System.Drawing.Point(12, 340);
@@ -344,7 +351,7 @@ namespace CalculatorApp
             this.sevenBtn.TabIndex = 2;
             this.sevenBtn.Text = "7";
             this.sevenBtn.UseVisualStyleBackColor = true;
-
+            this.sevenBtn.Click += new System.EventHandler(this.numberBtnClick);
 
             // eightBtn
             this.eightBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -354,7 +361,7 @@ namespace CalculatorApp
             this.eightBtn.TabIndex = 2;
             this.eightBtn.Text = "8";
             this.eightBtn.UseVisualStyleBackColor = true;
-
+            this.eightBtn.Click += new System.EventHandler(this.numberBtnClick);
 
             // nineBtn
             this.nineBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -364,7 +371,7 @@ namespace CalculatorApp
             this.nineBtn.TabIndex = 2;
             this.nineBtn.Text = "9";
             this.nineBtn.UseVisualStyleBackColor = true;
-
+            this.nineBtn.Click += new System.EventHandler(this.numberBtnClick);
 
             // minusBtn
             this.minusBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -374,7 +381,7 @@ namespace CalculatorApp
             this.minusBtn.TabIndex = 2;
             this.minusBtn.Text = "-";
             this.minusBtn.UseVisualStyleBackColor = true;
-
+         //   this.minusBtn.Click += new System.EventHandler(this.opratorClicked);
 
 
             // zeroBtn
@@ -385,7 +392,7 @@ namespace CalculatorApp
             this.zeroBtn.TabIndex = 2;
             this.zeroBtn.Text = "0";
             this.zeroBtn.UseVisualStyleBackColor = true;
-
+            this.zeroBtn.Click += new System.EventHandler(this.numberBtnClick);
 
             // dotBtn
             this.dotBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -406,7 +413,6 @@ namespace CalculatorApp
             this.plusBtn.Text = "+";
             this.plusBtn.UseVisualStyleBackColor = true;
 
-
             // equalBtn
             this.equalBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.equalBtn.Location = new System.Drawing.Point(296, 340);
@@ -417,18 +423,12 @@ namespace CalculatorApp
             this.equalBtn.UseVisualStyleBackColor = true;
 
 
-
             // label1
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 17);
             this.label1.TabIndex = 3;
-
-
-
-
-
 
 
             // Calc
@@ -457,7 +457,7 @@ namespace CalculatorApp
             this.Controls.Add(this.cBtn);
             this.Controls.Add(this.sevenBtn);
             this.Controls.Add(this.fourBtn);
-            this.Controls.Add(this.AcBtn);
+            this.Controls.Add(this.CeBtn);
             this.Controls.Add(this.oneBtn);
             this.Controls.Add(this.msBtn);
             this.Controls.Add(this.mPlusBtn);
@@ -467,8 +467,62 @@ namespace CalculatorApp
             this.Controls.Add(this.inputTxtbox);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-
         }
 
+
+       // number Btn Clicked
+        private void numberBtnClick(object sender, EventArgs e)
+        {
+            //Get the text property of the clicked button
+            string input = ((Button)sender).Text;
+
+            //Check if label2 needs to be cleared
+            if (clearerror)
+            {
+                label2.Text = "";
+                clearerror = false;
+            }
+            //Check if label1 needs to be cleared
+            if (cleartext)
+            {
+                //clear label
+                label1.Text = "";
+                //reset cleartext bool
+                cleartext = false;
+                //reset istext bool
+                isText = false;
+            }
+            //check if input is a decimal
+            if (input == ".")
+            {
+                //check if the label already has a decimal point
+                if (!label1.Text.Contains('.') && !label1.Text.Contains('E'))
+                {
+                    //add decimal point to label
+                    label1.Text += '.';
+                }
+                else if (label1.Text.Contains('.'))
+                {
+                    //Display error message
+                    label2.Text = "Cannot add another decimal";
+                    clearerror = true;
+                }
+                else if (label1.Text.Contains('E'))
+                {
+                    //Display error message
+                    label2.Text = "Cannot add a decimal to E";
+                    clearerror = true;
+                }
+
+            }
+            else
+            {
+                //add input to the label
+                label1.Text += input;
+                inputTxtbox.Text += input;
+                isText = false;
+            }
+        }
     }
 }
+
