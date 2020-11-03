@@ -17,7 +17,7 @@ namespace Calculator
         bool cleartext = false;
         bool isText = false;
         bool clearerror = false;
-      
+
         MenuStrip menuStrip1 = new MenuStrip();
         ToolStripMenuItem fileToolStripMenuItem = new ToolStripMenuItem();
         ToolStripMenuItem standardToolStripMenuItem = new ToolStripMenuItem();
@@ -203,7 +203,7 @@ namespace Calculator
             this.escapeBtn.Text = "←";
             this.escapeBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.escapeBtn.UseVisualStyleBackColor = true;
-
+            this.escapeBtn.Click += new System.EventHandler(this.clearScreen);
 
             // CeBtn
             this.CeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -213,6 +213,7 @@ namespace Calculator
             this.CeBtn.TabIndex = 2;
             this.CeBtn.Text = "CE";
             this.CeBtn.UseVisualStyleBackColor = true;
+            this.CeBtn.Click += new System.EventHandler(this.clearScreen);
 
 
             // cBtn
@@ -223,6 +224,7 @@ namespace Calculator
             this.cBtn.TabIndex = 2;
             this.cBtn.Text = "C";
             this.cBtn.UseVisualStyleBackColor = true;
+            this.cBtn.Click += new System.EventHandler(this.clearScreen);
 
             // plusMinusBtn
             this.plusMinusBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -381,7 +383,6 @@ namespace Calculator
             this.minusBtn.TabIndex = 2;
             this.minusBtn.Text = "-";
             this.minusBtn.UseVisualStyleBackColor = true;
-         //   this.minusBtn.Click += new System.EventHandler(this.opratorClicked);
 
 
             // zeroBtn
@@ -431,6 +432,11 @@ namespace Calculator
             this.label1.TabIndex = 3;
 
 
+
+
+
+
+
             // Calc
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -470,7 +476,7 @@ namespace Calculator
         }
 
 
-       // number Btn Clicked
+        //number btn click
         private void numberBtnClick(object sender, EventArgs e)
         {
             //Get the text property of the clicked button
@@ -523,6 +529,33 @@ namespace Calculator
                 isText = false;
             }
         }
+
+
+        //Clear button is clicked
+        public void clearScreen(Object sender, EventArgs e)
+        {
+            Button clear = (Button)(sender);
+            if (clear.Text == "C")
+            {
+                this.inputTxtbox.Text = "0";
+
+            }
+            else if (clear.Text == "CE")
+            {
+                this.inputTxtbox.Text = "0";
+                label1.Text = "";
+                label2.Text = "";
+            }
+            else
+            {
+                this.inputTxtbox.Text = this.inputTxtbox.Text.Substring(0, inputTxtbox.Text.Length - 1);
+                this.label1.Text = this.label1.Text.Substring(0, label1.Text.Length - 1);
+
+            }
+        }
+
+
+
     }
 }
 
