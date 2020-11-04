@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DF76ABCD-06DB-4451-95EA-A9FDF6F00A76}</ProjectGuid>
+    <ProjectGuid>{CF71E6D0-8E75-48D5-9B50-6F2DA198CA57}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CalculatorApp</RootNamespace>
-    <AssemblyName>CalculatorApp</AssemblyName>
+    <RootNamespace>Calculator</RootNamespace>
+    <AssemblyName>Calculator</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,8 +53,10 @@
     <Compile Include="Calculator.Designer.cs">
       <DependentUpon>Calculator.cs</DependentUpon>
     </Compile>
+    <Compile Include="MathLib.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScienceMathLib.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
